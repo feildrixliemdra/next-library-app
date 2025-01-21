@@ -26,7 +26,6 @@ const Header = () => {
           Home
         </Link>
         <Link href='/books'>Search</Link>
-        <Link href='/authors'>Authors</Link>
       </nav>
     </header>
   )
