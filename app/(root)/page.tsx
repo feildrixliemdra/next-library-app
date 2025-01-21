@@ -6,7 +6,11 @@ export default function Home() {
   return (
     <main>
       <BookOverview {...sampleBooks[0]} />
-      <BookList />
+      <BookList
+        books={sampleBooks}
+        title='Popular Books'
+        containerClassName='mt-28'
+      />
     </main>
   )
 }
