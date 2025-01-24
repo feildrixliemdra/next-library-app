@@ -3,6 +3,7 @@
 import React from 'react'
 import { signUpSchema } from '../../../lib/validation'
 import AuthForm from '../../../components/AuthForm'
+import { signUp } from '../../../lib/action/auth'
 
 const SignUp = () => {
   return (
@@ -13,10 +14,10 @@ const SignUp = () => {
         email: '',
         password: '',
         fullName: '',
-        universityId: '',
+        universityId: 0,
         universityCard: '',
       }}
-      onsubmit={() => {}}
+      onSubmit={signUp}
     />
   )
 }

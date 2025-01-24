@@ -25,6 +25,8 @@ import { Button } from './ui/button'
 import Link from 'next/link'
 import { FIELD_NAMES, FIELD_TYPES } from '../constant'
 import ImageUpload from './ImageUpload'
+import { toast } from '../hooks/use-toast'
+import { useRouter } from 'next/navigation'
 interface Props<T extends FieldValues> {
   schema: ZodType<T>
   defaultValue: T
@@ -38,6 +40,8 @@ const AuthForm = <T extends FieldValues>({
   defaultValue,
   onSubmit,
 }: Props<T>) => {
+  const router = useRouter()
+
   const isSignIn = type === 'SIGN_IN'
   // 1. Define your form.
   const form: UseFormReturn<T> = useForm<z.infer<typeof schema>>({
@@ -47,9 +51,23 @@ const AuthForm = <T extends FieldValues>({
 
   // 2. Define a submit handler.
   const handleSubmit: SubmitHandler<T> = async (data) => {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(data)
+    const result = await onSubmit(data)
+    if (result.success) {
+      toast({
+        title: 'Success',
+        description: isSignIn
+          ? 'You have Successfully Signed In'
+          : 'You have Successfully Signed Up',
+      })
+
+      router.push('/')
+    } else {
+      toast({
+        title: 'Error',
+        description: result.error || 'Something went wrong',
+        variant: 'destructive',
+      })
+    }
   }
 
   return (
@@ -66,7 +84,7 @@ const AuthForm = <T extends FieldValues>({
       </p>
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit(onSubmit)}
+          onSubmit={form.handleSubmit(handleSubmit)}
           className='space-y-6 w-full'
         >
           {Object.keys(defaultValue).map((field) => (

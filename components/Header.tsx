@@ -3,15 +3,19 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
-import { cn } from '../lib/utils'
+import { cn, getInitials } from '../lib/utils'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Session } from 'next-auth'
+import { Button } from './ui/button'
+import { signOut } from '../auth'
 
-const Header = () => {
+const Header = ({ session }: { session: Session }) => {
   const path = usePathname()
   return (
     <header className='flex justify-between gap-5 my-10'>
       <div className='flex flex-row gap-2 items-center'>
         <Image src='/icons/logo.svg' alt='logo' width={40} height={40} />
-        <Link href='/' className='font-semibold text-2xl'>
+        <Link href='/' className='font-semibold text-2xl text-white'>
           NextLibrary
         </Link>
       </div>
@@ -25,7 +29,13 @@ const Header = () => {
         >
           Home
         </Link>
-        <Link href='/books'>Search</Link>
+        <Link href='/profile' className='hover:cursor-pointer'>
+          <Avatar>
+            <AvatarFallback className='bg-amber-100'>
+              {getInitials(session.user?.name || 'NL')}
+            </AvatarFallback>
+          </Avatar>
+        </Link>
       </nav>
     </header>
   )
