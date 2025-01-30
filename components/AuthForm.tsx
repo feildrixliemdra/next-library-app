@@ -41,9 +41,8 @@ const AuthForm = <T extends FieldValues>({
   onSubmit,
 }: Props<T>) => {
   const router = useRouter()
-
   const isSignIn = type === 'SIGN_IN'
-  // 1. Define your form.
+  // 1. Define form.
   const form: UseFormReturn<T> = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     defaultValues: defaultValue as DefaultValues<T>,
