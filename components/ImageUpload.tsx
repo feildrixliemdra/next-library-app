@@ -71,7 +71,7 @@ const ImageUpload = ({
           e.preventDefault()
 
           if (ikUploadRef.current) {
-            //@ts-ignore
+            //@ts-expect-error expected
             ikUploadRef.current?.click()
           }
         }}
