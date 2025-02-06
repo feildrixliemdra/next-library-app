@@ -1,12 +1,6 @@
 'use client'
 import React, { useRef, useState } from 'react'
-import {
-  IKImage,
-  IKVideo,
-  ImageKitProvider,
-  IKUpload,
-  ImageKitContext,
-} from 'imagekitio-next'
+import { IKImage, ImageKitProvider, IKUpload } from 'imagekitio-next'
 import config from '../lib/config'
 import Image from 'next/image'
 import { useToast } from '../hooks/use-toast'

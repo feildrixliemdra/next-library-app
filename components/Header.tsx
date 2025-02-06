@@ -4,10 +4,8 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React from 'react'
 import { cn, getInitials } from '../lib/utils'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Session } from 'next-auth'
-import { Button } from './ui/button'
-import { signOut } from '../auth'
 
 const Header = ({ session }: { session: Session }) => {
   const path = usePathname()

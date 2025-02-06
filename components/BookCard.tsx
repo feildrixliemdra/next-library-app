@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { Button } from './ui/button'
 
 const BookCard = ({
-  id,
+  // id,
   title,
   genre,
   cover_color,
